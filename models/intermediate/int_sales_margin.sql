@@ -1,8 +1,6 @@
 with sales as (
     select
-      product_id,
-      quantity,
-      revenue
+        *
     from {{ ref('stg_gz_raw_data__sales') }}
 ),
 
@@ -14,6 +12,8 @@ products as (
 )
 
 select
+  s.orders_id,
+  s.date_date,
   s.product_id,
   s.quantity,
   s.revenue,
