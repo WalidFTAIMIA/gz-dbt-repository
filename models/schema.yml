@@ -31,4 +31,76 @@ sources:
               column_name: orders_id
           - not_null:
               column_name: orders_id
-
+models:
+   - name: int_sales_margin
+     description: margin calculation per order
+     columns:
+       - name: orders_id
+         description: orders key
+         tests:
+           - not_null
+       - name: products_id
+         description: products key
+         tests:
+           - not_null
+       - name: margin
+         description: Margin = Revenue - Purchase_cost
+         tests:
+           - not_null
+       - name: Purchase_cost
+         description: Purchase_cost = Quantity * Purchase_price
+         tests:
+           - not_null
+       - name: date_date
+         description: date of the order
+         tests:
+           - not_null
+       - name: revenue
+         description: sum of revenue per order
+         tests:
+           - not_null
+       - name: quantity
+         description: sum of quantity per order
+         tests:
+           - not_null
+     tests:
+       - unique:
+           column_name: "(orders_id || '-' || products_id)"
+       - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [orders_id, products_id]
+   - name: int_orders_operational
+     description: operational margin calculation per order
+     columns:
+       - name: orders_id
+         description: primary key
+         tests:
+           - unique
+           - not_null
+       - name: date_date
+         description: date of the order
+         tests:
+           - not_null
+       - name: operational_margin
+         description: operational_margin = margin + shipping_fee - log_cost - ship_cost
+       - name: quantity
+         description: sum of quantity per order
+         tests:
+           - not_null
+       - name: revenue
+         description: sum of revenue per order
+         tests:
+           - not_null
+       - name: purchase_cost
+         description: purchase_cost = quantity * purchase_price
+         tests:
+           - not_null
+       - name: margin
+         description: margin = revenue - purchase_cost
+         tests:
+           - not_null
+       - name: shipping_fee
+         description: the price the customer pays for shipping
+       - name: log_cost
+         description: the cost of preparing the parcel in the distribution centre/warehouse
+       - name: ship_cost
+         description: shipping cost paid by Greenweez to the carrier/logistics provider
