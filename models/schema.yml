@@ -9,6 +9,8 @@ sources:
       - name: sales
         identifier: raw_gz_sales
         description: "sales of Greenweez"
+        freshness: 
+          warn_after: {count: 90, period: day}
         tests:
           - unique:
              column_name: "(pdt_id || '-' || orders_id)"
