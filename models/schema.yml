@@ -31,6 +31,18 @@ sources:
               column_name: orders_id
           - not_null:
               column_name: orders_id
+      - name: adwords
+        identifier: raw_gz_adwords
+        description: "adwords table"
+      - name: bing
+        identifier: raw_gz_bing
+        description: "bing table"
+      - name: criteo
+        identifier: raw_gz_criteo
+        description: "criteo table"
+      - name: facebook
+        identifier: raw_gz_facebook
+        description: "facebook table"
 models:
    - name: int_sales_margin
      description: margin calculation per order
