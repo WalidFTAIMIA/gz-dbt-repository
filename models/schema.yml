@@ -1,0 +1,31 @@
+ # schema.yml
+
+version: 2
+
+sources:
+  - name: raw
+    schema: gz_raw_data
+    tables:
+      - name: sales
+        identifier: raw_gz_sales
+        description: "sales of Greenweez"
+        tests:
+          - unique:
+             column_name: "(pdt_id || '-' || orders_id)"
+      - name: product
+        identifier: raw_gz_product
+        description: "purchase price"
+        tests:
+          - unique:
+              column_name: products_id
+          - not_null:
+              column_name: products_id
+      - name: ship
+        identifier: raw_gz_ship
+        description: "ship table"
+        tests:
+          - unique:
+              column_name: orders_id
+          - not_null:
+              column_name: orders_id
+
