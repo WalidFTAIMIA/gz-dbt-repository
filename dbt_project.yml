@@ -42,5 +42,4 @@ models:
     finance:
       +schema: finance
     # Applies to all files under models/example/
-    example:
-      +materialized: table
+   
